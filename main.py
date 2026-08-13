@@ -30,8 +30,8 @@ if file and st.button("Process File"):
         chunks.append(text[i: i + chunk_size])
     st.write(len(chunks))
     now = datetime.now()
-    chroma_client = chromadb.Client()
-    collection = chroma_client.create_collection("A" + str(now) + "documents" + "A")
+    chroma_client = chromadb.Client() #"A" + str(now) + "documents" + "A"
+    collection = chroma_client.create_collection("poop")
     tags = [file.name + str(i) for i in range(len(chunks))] #better citations
     collection.add(documents=chunks, ids=tags)
 
