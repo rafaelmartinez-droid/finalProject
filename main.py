@@ -2,7 +2,6 @@ import streamlit as st
 import chromadb
 from groq import Groq
 from pypdf import PdfReader
-from chromadb.config import Settings
 
 API_KEY = st.secrets["GROQ_API_KEY"]
 
@@ -29,7 +28,7 @@ if file and st.button("Process File"):
     for i in range(0, len(text), step):
         chunks.append(text[i: i + chunk_size])
     st.write(len(chunks))
-    chroma_client = chromadb.Client(settings=Settings(allow_reset=True))
+    chroma_client = chromadb.Client(allow_reset=True)
     st.session_state.chroma_client = chroma_client
     #collection = chroma_client.create_collection("documents" + file.name)
     try:
