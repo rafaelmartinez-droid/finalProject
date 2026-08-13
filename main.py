@@ -13,6 +13,7 @@ file = st.file_uploader("Upload a .pdf file", type=["pdf", "txt"])#change
 
 if file and st.button("Process File"):
     st.write("File processed")
+    st.write(file.type)
     if file.type == "pdf":
         reader = PdfReader(file)
         text = ""
