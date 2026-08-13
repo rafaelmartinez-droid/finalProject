@@ -30,6 +30,7 @@ if file and st.button("Process File"):
         chunks.append(text[i: i + chunk_size])
     st.write(len(chunks))
     chroma_client = chromadb.Client()
+    st.session_state.chroma_client = chroma_client
     #collection = chroma_client.create_collection("documents" + file.name)
     try:
         collection = chroma_client.create_collection("testing")
@@ -45,7 +46,7 @@ if file and st.button("Process File"):
 question = st.text_input("Ask a question about the file")
 
 if st.button("Delete collection"):
-    chroma_client.reset()
+    st.session_state.chroma_client.reset()
 
 if st.button("Search"):
     st.write("thinking!")
