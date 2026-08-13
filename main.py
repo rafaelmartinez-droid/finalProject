@@ -112,6 +112,7 @@ if st.button("Delete collection", icon="🗑️"):
                 st.write(f"Deleted collection: {collection.name}")
         st.session_state.context = []
         del st.session_state['collection']
+        del st.session_state['question']
     except Exception:
         st.write("Nothing found to delete")
         st.session_state.context = []
