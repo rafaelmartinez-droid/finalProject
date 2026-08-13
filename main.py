@@ -38,7 +38,7 @@ if file and st.button("Process File"):
     st.session_state.chroma_client = chroma_client
     #collection = chroma_client.create_collection("documents" + file.name)
 #try:
-    collection = chroma_client.create_collection("testing" + now)
+    collection = chroma_client.create_collection("document_" + now + "_" + file.name)
 #except Exception:
  #   collection = chroma_client.get_collection("testing" + now)
     st.session_state.collection = collection
@@ -96,7 +96,7 @@ if st.button("Delete collection", icon="🗑️"):
     try:
         collections = st.session_state.chroma_client.list_collections()
         for collection in collections:
-            if "testing" in collection.name:
+            if "document_" in collection.name:
                 st.session_state.chroma_client.delete_collection(name=collection.name)
                 st.write(f"Deleted collection: {collection.name}")
         st.session_state.context = []
