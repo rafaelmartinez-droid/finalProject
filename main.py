@@ -61,11 +61,12 @@ question = st.text_input("Ask a question about the file")
 
 
 
-if st.button("Search") and "collection" in st.session_state:
-    st.write("thinking!")
+if st.button("Search"):
     if "collection" not in st.session_state:
-        st.write("no document provided")
+        st.write("No documents provided")
+
     else:
+        st.write("thinking!")
         collection = st.session_state.collection
 
         result = collection.query(query_texts=[question], n_results=10)
