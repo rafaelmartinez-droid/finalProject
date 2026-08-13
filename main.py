@@ -49,7 +49,10 @@ question = st.text_input("Ask a question about the file")
 if st.button("Search"):
     st.write("thinking!")
     collection = st.session_state.collection
-    result = collection.query(query_texts=[question], n_results=10)
+    if question is not None:
+        result = collection.query(query_texts=[question], n_results=10)
+    else:
+        st.write("no question provided")
     if "context" not in st.session_state:
         st.session_state.context = []
     for i in result["documents"][0]:
