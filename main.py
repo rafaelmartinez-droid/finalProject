@@ -9,7 +9,7 @@ client = Groq(api_key=API_KEY)
 MODEL = "llama-3.1-8b-instant"
 
 #file = st.file_uploader("Upload a .txt file", type="txt")#change
-file = st.file_uploader("Upload a .pdf file", type=["pdf", "txt"])#change
+file = st.file_uploader("Upload a .pdf file or a .txt file", type=["pdf", "txt"])#change
 
 if file and st.button("Process File"):
     st.write("File processed")
