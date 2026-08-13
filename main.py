@@ -14,6 +14,12 @@ API_KEY = st.secrets["GROQ_API_KEY"]
 client = Groq(api_key=API_KEY)
 MODEL = "llama-3.1-8b-instant"
 
+with st.sidebar:
+    chunk_size = st.slider("Chunk size", min_value=100, max_value=1000, value=300)
+    overlap = st.slider("Overlap", min_value=0, max_value=1000, value=200)
+    st.write("current chunk size:", chunk_size)
+    st.write("current overlap:", overlap)
+
 #file = st.file_uploader("Upload a .txt file", type="txt")#change
 file = st.file_uploader("Upload a .pdf file or a .txt file", type=["pdf", "txt"])#change
 
@@ -28,8 +34,8 @@ if file and st.button("Process File"):
     elif file.type == "text/plain":
         text = file.read().decode("utf-8")
     chunks = []
-    chunk_size = 300
-    overlap = 100
+    # chunk_size = 300
+    # overlap = 100
     step = chunk_size - overlap
     for i in range(0, len(text), step):
         chunks.append(text[i: i + chunk_size])
