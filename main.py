@@ -46,6 +46,7 @@ question = st.text_input("Ask a question about the file")
 
 if st.button("Delete collection"):
     st.session_state.chroma_client.delete_collection("testing")
+    st.session_state.context = []
 
 if st.button("Search"):
     st.write("thinking!")
