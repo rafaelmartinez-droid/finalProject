@@ -80,5 +80,8 @@ if st.button("LLM answer"):
     st.write("LLM Answer:", response.choices[0].message.content)
 
 if st.button("Delete collection", icon="🗑️"):
-    st.session_state.chroma_client.delete_collection("testing")
-    st.session_state.context = []
+    try:
+        st.session_state.chroma_client.delete_collection("testing")
+        st.session_state.context = []
+    except Exception:
+        st.session_state.context = []
