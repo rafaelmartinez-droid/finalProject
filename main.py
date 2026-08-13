@@ -24,18 +24,19 @@ with st.sidebar:
     st.write("current distance limiter:", distance_limiter)
 
 #file = st.file_uploader("Upload a .txt file", type="txt")#change
-file = st.file_uploader("Upload a .pdf file or a .txt file", type=["pdf", "txt"], accept_multiple_files=True)#change
+files = st.file_uploader("Upload a .pdf file or a .txt file", type=["pdf", "txt"], accept_multiple_files=True)#change
 
-if file and st.button("Process File"):
+if files and st.button("Process File"):
     st.write("File processed")
-    st.write(file.type)
-    if file.type == "application/pdf":
-        reader = PdfReader(file)
-        text = ""
-        for page in reader.pages:
-            text += page.extract_text() + "\n"
-    elif file.type == "text/plain":
-        text = file.read().decode("utf-8")
+    for file in files:
+        st.write(file.type)
+        if file.type == "application/pdf":
+            reader = PdfReader(file)
+            text = ""
+            for page in reader.pages:
+                text += page.extract_text() + "\n"
+        elif file.type == "text/plain":
+            text = file.read().decode("utf-8")
     chunks = []
     # chunk_size = 300
     # overlap = 100
