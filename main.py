@@ -94,7 +94,11 @@ if st.button("LLM answer"):
 
 if st.button("Delete collection", icon="🗑️"):
     try:
-        st.session_state.chroma_client.delete_collection("testing")
+        collections = st.session_state.chroma_client.list_collections()
+        for collection in collections:
+            if "testing" in collection.name:
+                st.session_state.chroma_client.delete_collection(name=collection.name)
+                st.write(f"Deleted collection: {collection.name}")
         st.session_state.context = []
     except Exception:
         st.session_state.context = []
