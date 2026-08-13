@@ -16,9 +16,11 @@ MODEL = "llama-3.1-8b-instant"
 
 with st.sidebar:
     chunk_size = st.slider("Chunk size", min_value=100, max_value=1000, value=300)
-    overlap = st.slider("Overlap", min_value=0, max_value=1000, value=200)
+    overlap = st.slider("Overlap", min_value=0, max_value=999, value=200)
+    distance_limiter = st.slider("Distance limiter", min_value=0, max_value=3, value=1.25)
     st.write("current chunk size:", chunk_size)
     st.write("current overlap:", overlap)
+    st.write("current distance limiter:", distance_limiter)
 
 #file = st.file_uploader("Upload a .txt file", type="txt")#change
 file = st.file_uploader("Upload a .pdf file or a .txt file", type=["pdf", "txt"])#change
@@ -71,7 +73,7 @@ if st.button("Search") and "collection" in st.session_state:
             st.session_state.context = []
         for i in result["documents"][0]:
             rd = result["documents"][0]
-            if result["distances"][0][rd.index(i)] < 1.25:
+            if result["distances"][0][rd.index(i)] < distance_limiter:
                 st.session_state.context.append(i)
                 st.write(i)
             else:
