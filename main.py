@@ -55,7 +55,7 @@ question = st.text_input("Ask a question about the file")
 if st.button("Search"):
     st.write("thinking!")
     if "collection" not in st.session_state:
-        st.write("no question provided")
+        st.write("no document provided")
     else:
         collection = st.session_state.collection
 
