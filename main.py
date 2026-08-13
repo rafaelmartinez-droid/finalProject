@@ -44,9 +44,7 @@ if file and st.button("Process File"):
 
 question = st.text_input("Ask a question about the file")
 
-if st.button("Delete collection", icon="🗑️"):
-    st.session_state.chroma_client.delete_collection("testing")
-    st.session_state.context = []
+
 
 if st.button("Search"):
     st.write("thinking!")
@@ -80,3 +78,7 @@ if st.button("LLM answer"):
 
     response = client.chat.completions.create(model=MODEL, messages=messages)
     st.write("LLM Answer:", response.choices[0].message.content)
+
+if st.button("Delete collection", icon="🗑️"):
+    st.session_state.chroma_client.delete_collection("testing")
+    st.session_state.context = []
