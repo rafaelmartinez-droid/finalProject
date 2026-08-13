@@ -6,7 +6,7 @@ from datetime import datetime
 
 now = datetime.now()
 
-now = str(now)
+now = str(now).replace(":", "_")
 
 API_KEY = st.secrets["GROQ_API_KEY"]
 
