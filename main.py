@@ -104,4 +104,3 @@ if st.button("Delete collection", icon="🗑️"):
     except Exception:
         st.write("Nothing found to delete")
         st.session_state.context = []
-        del st.session_state['collection']
