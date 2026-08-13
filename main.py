@@ -78,7 +78,7 @@ if st.button("Search"):
         for ans in st.session_state.context:
             st.write(ans)
 
-if st.button("LLM answer"):
+if st.button("LLM answer") and st.session_state.collection and st.session_state.question:
     st.write("contacting LLM...")
 
     context = "\n".join(st.session_state.context)
