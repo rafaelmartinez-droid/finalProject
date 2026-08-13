@@ -44,6 +44,9 @@ if file and st.button("Process File"):
 
 question = st.text_input("Ask a question about the file")
 
+if st.button("Delete collection"):
+    chroma_client.reset()
+
 if st.button("Search"):
     st.write("thinking!")
     collection = st.session_state.collection
