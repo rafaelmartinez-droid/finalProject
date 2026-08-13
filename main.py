@@ -87,22 +87,22 @@ if st.button("Search") and "collection" in st.session_state:
         for ans in st.session_state.context:
             st.write(ans)
 
-if st.button("LLM answer") and "question" in st.session_state:
-    st.write("contacting LLM...")
+if st.button("LLM answer"):
+    if "question" in st.session_state:
+        st.write("contacting LLM...")
 
-    context = "\n".join(st.session_state.context)
-    question = st.session_state.question
+        context = "\n".join(st.session_state.context)
+        question = st.session_state.question
 
-    messages = [
-        {"role": "system", "content": "Answer the user's question using only the provided document context. If the context contains enough information to answer, give the answer."},
-        {"role": "user", "content": f"DOCUMENT CONTEXT:\n{context}\n\nQUESTION:\n{question}"}
-    ]
+        messages = [
+            {"role": "system", "content": "Answer the user's question using only the provided document context. If the context contains enough information to answer, give the answer."},
+            {"role": "user", "content": f"DOCUMENT CONTEXT:\n{context}\n\nQUESTION:\n{question}"}
+        ]
 
-    response = client.chat.completions.create(model=MODEL, messages=messages)
-    st.write("LLM Answer:", response.choices[0].message.content)
-else:
-    st.write("No question provided")
-
+        response = client.chat.completions.create(model=MODEL, messages=messages)
+        st.write("LLM Answer:", response.choices[0].message.content)
+    else:
+        st.write("No question provided")
 if st.button("Delete collection", icon="🗑️"):
     try:
         collections = st.session_state.chroma_client.list_collections()
