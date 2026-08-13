@@ -1,12 +1,9 @@
 import streamlit as st
 import chromadb
-import os
-from dotenv import load_dotenv
 from groq import Groq
 from pypdf import PdfReader
 
-load_dotenv()
-API_KEY = os.getenv("GROQ_API_KEY")
+API_KEY = st.secrets["GROQ_API_KEY"]
 
 client = Groq(api_key=API_KEY)
 MODEL = "llama-3.1-8b-instant"

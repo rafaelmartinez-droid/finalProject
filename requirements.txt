@@ -1,5 +1,4 @@
 chromadb
-os
-dotenv
 groq
 pypdf
+streamlit
