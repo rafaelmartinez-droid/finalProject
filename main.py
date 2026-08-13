@@ -2,6 +2,7 @@ import streamlit as st
 import chromadb
 from groq import Groq
 from pypdf import PdfReader
+from datetime import datetime
 
 API_KEY = st.secrets["GROQ_API_KEY"]
 
@@ -28,9 +29,9 @@ if file and st.button("Process File"):
     for i in range(0, len(text), step):
         chunks.append(text[i: i + chunk_size])
     st.write(len(chunks))
-
+    now = datetime.now()
     chroma_client = chromadb.Client()
-    collection = chroma_client.create_collection("documents")
+    collection = chroma_client.create_collection(str(now) + "documents")
     tags = [file.name + str(i) for i in range(len(chunks))] #better citations
     collection.add(documents=chunks, ids=tags)
 
