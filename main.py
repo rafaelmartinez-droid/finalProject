@@ -29,10 +29,10 @@ if file and st.button("Process File"):
     for i in range(0, len(text), step):
         chunks.append(text[i: i + chunk_size])
     st.write(len(chunks))
-    now = datetime.now()
+    formatted_time = datetime.now().strftime("%H:%M:%S")
     chroma_client = chromadb.Client() #"A" + str(now) + "documents" + "A"
 
-    collection = chroma_client.create_collection("documents" + file.name) #maybe fix the duplicate naming later
+    collection = chroma_client.create_collection("documents" + file.name + formatted_time) #maybe fix the duplicate naming later
     st.session_state.collection = collection
     tags = [file.name + str(i) for i in range(len(chunks))] #better citations
     collection.add(documents=chunks, ids=tags)
