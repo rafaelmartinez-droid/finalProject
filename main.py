@@ -44,7 +44,7 @@ if file and st.button("Process File"):
 
 question = st.text_input("Ask a question about the file")
 
-if st.button("Delete collection"):
+if st.button("Delete collection", icon="🗑️"):
     st.session_state.chroma_client.delete_collection("testing")
     st.session_state.context = []
 
