@@ -14,12 +14,12 @@ file = st.file_uploader("Upload a .pdf file", type=["pdf", "txt"])#change
 if file and st.button("Process File"):
     st.write("File processed")
     st.write(file.type)
-    if file.type == "pdf":
+    if file.type == "application/pdf":
         reader = PdfReader(file)
         text = ""
         for page in reader.pages:
             text += page.extract_text() + "\n"
-    elif file.type == "txt":
+    elif file.type == "text/plain":
         text = file.read().decode("utf-8")
     chunks = []
     chunk_size = 300
