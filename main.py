@@ -100,6 +100,8 @@ if st.button("LLM answer") and "question" in st.session_state:
 
     response = client.chat.completions.create(model=MODEL, messages=messages)
     st.write("LLM Answer:", response.choices[0].message.content)
+else:
+    st.write("No question provided")
 
 if st.button("Delete collection", icon="🗑️"):
     try:
