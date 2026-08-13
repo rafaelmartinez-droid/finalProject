@@ -54,28 +54,29 @@ question = st.text_input("Ask a question about the file")
 
 if st.button("Search"):
     st.write("thinking!")
-    if not st.session_state.collection:
+    if "collection" not in st.session_state:
         st.write("no question provided")
-    collection = st.session_state.collection
+    else:
+        collection = st.session_state.collection
 
-    result = collection.query(query_texts=[question], n_results=10)
+        result = collection.query(query_texts=[question], n_results=10)
 
-    if "context" not in st.session_state:
-        st.session_state.context = []
-    for i in result["documents"][0]:
-        rd = result["documents"][0]
-        if result["distances"][0][rd.index(i)] < 1.25:
-            st.session_state.context.append(i)
-            st.write(i)
-        else:
-            continue
-    if st.session_state.context == []:
-        st.write("this question was not answered in the document provided")
-    st.session_state.question = question
-    st.write(result["distances"])
-    st.write(st.session_state.context)
-    for ans in st.session_state.context:
-        st.write(ans)
+        if "context" not in st.session_state:
+            st.session_state.context = []
+        for i in result["documents"][0]:
+            rd = result["documents"][0]
+            if result["distances"][0][rd.index(i)] < 1.25:
+                st.session_state.context.append(i)
+                st.write(i)
+            else:
+                continue
+        if st.session_state.context == []:
+            st.write("this question was not answered in the document provided")
+        st.session_state.question = question
+        st.write(result["distances"])
+        st.write(st.session_state.context)
+        for ans in st.session_state.context:
+            st.write(ans)
 
 if st.button("LLM answer"):
     st.write("contacting LLM...")
