@@ -2,6 +2,11 @@ import streamlit as st
 import chromadb
 from groq import Groq
 from pypdf import PdfReader
+from datetime import datetime
+
+now = datetime.now()
+
+now = str(now)
 
 API_KEY = st.secrets["GROQ_API_KEY"]
 
@@ -32,9 +37,9 @@ if file and st.button("Process File"):
     st.session_state.chroma_client = chroma_client
     #collection = chroma_client.create_collection("documents" + file.name)
     try:
-        collection = chroma_client.create_collection("testing")
+        collection = chroma_client.create_collection("testing" + now)
     except Exception:
-        collection = chroma_client.get_collection("testing")
+        collection = chroma_client.get_collection("testing" + now)
     st.session_state.collection = collection
     tags = [file.name + str(i) for i in range(len(chunks))] #better citations
     collection.add(documents=chunks, ids=tags)
@@ -48,11 +53,12 @@ question = st.text_input("Ask a question about the file")
 
 if st.button("Search"):
     st.write("thinking!")
-    collection = st.session_state.collection
-    if question is not None:
-        result = collection.query(query_texts=[question], n_results=10)
-    else:
+    if not st.session_state.collection:
         st.write("no question provided")
+    collection = st.session_state.collection
+
+    result = collection.query(query_texts=[question], n_results=10)
+
     if "context" not in st.session_state:
         st.session_state.context = []
     for i in result["documents"][0]:
