@@ -31,8 +31,12 @@ if file and st.button("Process File"):
     st.write(len(chunks))
     formatted_time = datetime.now().strftime("%H:%M:%S")
     chroma_client = chromadb.Client() #"A" + str(now) + "documents" + "A"
-
-    collection = chroma_client.create_collection("documents" + file.name + formatted_time) #maybe fix the duplicate naming later
+    #collection = chroma_client.create_collection("documents" + file.name)
+    try:
+        collection = chroma_client.create_collection("documents" + file.name)
+    except Exception:
+        # Fallback to fetching the existing collection
+        collection = chroma_client.get_collection("documents" + file.name)
     st.session_state.collection = collection
     tags = [file.name + str(i) for i in range(len(chunks))] #better citations
     collection.add(documents=chunks, ids=tags)
