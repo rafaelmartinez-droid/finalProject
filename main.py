@@ -36,10 +36,10 @@ if file and st.button("Process File"):
     chroma_client = chromadb.Client()
     st.session_state.chroma_client = chroma_client
     #collection = chroma_client.create_collection("documents" + file.name)
-    try:
-        collection = chroma_client.create_collection("testing" + now)
-    except Exception:
-        collection = chroma_client.get_collection("testing" + now)
+#try:
+    collection = chroma_client.create_collection("testing" + now)
+#except Exception:
+ #   collection = chroma_client.get_collection("testing" + now)
     st.session_state.collection = collection
     tags = [file.name + str(i) for i in range(len(chunks))] #better citations
     collection.add(documents=chunks, ids=tags)
