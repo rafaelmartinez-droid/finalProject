@@ -24,7 +24,7 @@ with st.sidebar:
     st.write("current distance limiter:", distance_limiter)
 
 #file = st.file_uploader("Upload a .txt file", type="txt")#change
-file = st.file_uploader("Upload a .pdf file or a .txt file", type=["pdf", "txt"])#change
+file = st.file_uploader("Upload a .pdf file or a .txt file", type=["pdf", "txt"], accept_multiple_files=True)#change
 
 if file and st.button("Process File"):
     st.write("File processed")
