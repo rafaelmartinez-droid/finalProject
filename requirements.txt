@@ -1,0 +1,5 @@
+chromadb
+os
+dotenv
+groq
+pypdf
