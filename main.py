@@ -3,6 +3,9 @@ import chromadb
 from groq import Groq
 from pypdf import PdfReader
 from datetime import datetime
+from fractions import Fraction
+
+multiplier = Fraction(2, 3)
 
 now = datetime.now()
 
@@ -17,7 +20,7 @@ MODEL = "llama-3.1-8b-instant"
 with st.sidebar:
     st.title("Settings")
     chunk_size = st.slider("Chunk size", min_value=100, max_value=1000, value=300, step=10)
-    overlap = st.slider("Overlap", min_value=0, max_value=chunk_size-10, value=chunk_size-100, step=10)
+    overlap = st.slider("Overlap", min_value=0, max_value=chunk_size-10, value=round(chunk_size*multiplier, -1), step=10)
     distance_limiter = st.slider("Accept answers below this distance", min_value=0.0, max_value=3.0, value=1.25, step=0.01)
     st.write("current chunk size:", chunk_size)
     st.write("current overlap:", overlap)

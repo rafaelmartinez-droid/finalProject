@@ -3,3 +3,4 @@ groq
 pypdf
 streamlit
 datetime
+fractions
