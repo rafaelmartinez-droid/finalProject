@@ -67,6 +67,7 @@ if st.button("LLM answer"):
     st.write("contacting LLM...")
 
     context = "\n".join(st.session_state.context)
+    st.write(context)
     question = st.session_state.question
 
     messages = [
