@@ -52,7 +52,7 @@ question = st.text_input("Ask a question about the file")
 
 
 
-if st.button("Search"):
+if st.button("Search") and "collection" in st.session_state:
     st.write("thinking!")
     if "collection" not in st.session_state:
         st.write("no document provided")
