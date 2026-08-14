@@ -16,6 +16,7 @@ MODEL = "llama-3.1-8b-instant"
 
 with st.sidebar:
     st.title("Settings")
+    print_distances = st.checkbox("Display distances")
     chunk_size = st.slider("Chunk size", min_value=100, max_value=1000, value=300, step=10)
     overlap = st.slider("Overlap", min_value=0, max_value=chunk_size-10, value=chunk_size-100, step=10)
     distance_limiter = st.slider("Accept answers below this distance", min_value=0.0, max_value=3.0, value=1.25, step=0.01)
@@ -85,8 +86,8 @@ if st.button("Search"):
         st.session_state.question = question
         st.write(result["distances"])
         st.write(st.session_state.context)
-        for ans in st.session_state.context:
-            st.write(ans)
+        # for ans in st.session_state.context:
+        #     st.write(ans)
 
 if st.button("LLM answer"):
     if "question" in st.session_state:
