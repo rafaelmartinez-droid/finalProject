@@ -17,6 +17,8 @@ MODEL = "llama-3.1-8b-instant"
 with st.sidebar:
     st.title("Settings")
     print_distances = st.checkbox("Display distances")
+    print_file_type = st.checkbox("Display file type")
+    print_chunk_amount = st.checkbox("Display chunk amount")
     chunk_size = st.slider("Chunk size", min_value=100, max_value=1000, value=300, step=10)
     overlap = st.slider("Overlap", min_value=0, max_value=chunk_size-10, value=chunk_size-100, step=10)
     distance_limiter = st.slider("Accept answers below this distance", min_value=0.0, max_value=3.0, value=1.25, step=0.01)
@@ -30,8 +32,9 @@ with st.sidebar:
 file = st.file_uploader("Upload a .pdf file or a .txt file", type=["pdf", "txt"])#change
 
 if file and st.button("Process File"):
-    st.write("File processed")
-    st.write(file.type)
+    st.write("Processing file")
+    if print_file_type:
+        st.write("File type is: ", file.type)
     if file.type == "application/pdf":
         reader = PdfReader(file)
         text = ""
@@ -45,7 +48,8 @@ if file and st.button("Process File"):
     step = chunk_size - overlap
     for i in range(0, len(text), step):
         chunks.append(text[i: i + chunk_size])
-    st.write(len(chunks))
+    if print_chunk_amount:
+        st.write("There are: ", len(chunks), " chunks")
     chroma_client = chromadb.Client()
     st.session_state.chroma_client = chroma_client
     #collection = chroma_client.create_collection("documents" + file.name)
