@@ -86,7 +86,7 @@ if st.button("Search"):
         st.session_state.question = question
         if print_distances:
             st.write(result["distances"])
-            st.write("accepted answers:", len(result["distances"]))
+            st.write("accepted answers:", len(result))
             st.session_state.context = result["distances"]
         # st.write(st.session_state.context)
         # for ans in st.session_state.context:
