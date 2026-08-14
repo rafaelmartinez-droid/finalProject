@@ -29,7 +29,7 @@ with st.sidebar:
     st.write("current amount of results:", amount_of_results)
 
 #file = st.file_uploader("Upload a .txt file", type="txt")#change
-st.title("LLM and RAG document interpreter")
+st.header("LLM and RAG document interpreter")
 file = st.file_uploader("1. Upload a .pdf file or a .txt file", type=["pdf", "txt"])#change
 
 if file and st.button("Process File"):
