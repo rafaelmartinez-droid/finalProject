@@ -84,7 +84,8 @@ if st.button("Search"):
         if st.session_state.context == []:
             st.write("This question was not answered in the document provided")
         st.session_state.question = question
-        st.write(result["distances"])
+        if print_distances:
+            st.write(result["distances"])
         # st.write(st.session_state.context)
         # for ans in st.session_state.context:
         #     st.write(ans)
