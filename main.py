@@ -89,6 +89,7 @@ if st.button("Search"):
         # st.write(st.session_state.context)
         # for ans in st.session_state.context:
         #     st.write(ans)
+        st.write("Done!")
 
 if st.button("LLM answer"):
     if "question" in st.session_state:
