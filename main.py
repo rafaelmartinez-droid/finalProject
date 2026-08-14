@@ -78,7 +78,7 @@ if st.button("Search"):
             rd = result["documents"][0]
             if result["distances"][0][rd.index(i)] < distance_limiter:
                 st.session_state.context.append(i)
-                st.write(i)
+                # st.write(i)
             else:
                 continue
         if st.session_state.context == []:
