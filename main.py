@@ -73,7 +73,7 @@ if st.button("3. Search"):
         st.write("No documents provided")
 
     else:
-        st.write("thinking!")
+        st.write("Thinking!")
         collection = st.session_state.collection
 
         result = collection.query(query_texts=[question], n_results=amount_of_results)
@@ -99,7 +99,7 @@ if st.button("3. Search"):
 
 if st.button("4. LLM answer"):
     if "question" in st.session_state:
-        st.write("contacting LLM...")
+        st.write("Contacting LLM...")
 
         context = "\n".join(st.session_state.context)
         question = st.session_state.question
