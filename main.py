@@ -29,7 +29,7 @@ with st.sidebar:
     st.write("current amount of results:", amount_of_results)
 
 #file = st.file_uploader("Upload a .txt file", type="txt")#change
-file = st.file_uploader("Upload a .pdf file or a .txt file", type=["pdf", "txt"])#change
+file = st.file_uploader("1. Upload a .pdf file or a .txt file", type=["pdf", "txt"])#change
 
 if file and st.button("Process File"):
     st.write("Processing file")
@@ -64,11 +64,11 @@ if file and st.button("Process File"):
     st.session_state.collection = collection
     st.write("Chunks added to knowledge base!")
 
-question = st.text_input("Ask a question about the file")
+question = st.text_input("2. Ask a question about the file")
 
 
 
-if st.button("Search"):
+if st.button("3. Search"):
     if "collection" not in st.session_state:
         st.write("No documents provided")
 
@@ -97,7 +97,7 @@ if st.button("Search"):
         #     st.write(ans)
         st.write("Done!")
 
-if st.button("LLM answer"):
+if st.button("4. LLM answer"):
     if "question" in st.session_state:
         st.write("contacting LLM...")
 
