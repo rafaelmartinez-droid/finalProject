@@ -20,9 +20,11 @@ with st.sidebar:
     chunk_size = st.slider("Chunk size", min_value=100, max_value=1000, value=300, step=10)
     overlap = st.slider("Overlap", min_value=0, max_value=chunk_size-10, value=chunk_size-100, step=10)
     distance_limiter = st.slider("Accept answers below this distance", min_value=0.0, max_value=3.0, value=1.25, step=0.01)
+    amount_of_results = st.slider("Number of results", min_value=1, max_value=25, value=10, step=1)
     st.write("current chunk size:", chunk_size)
     st.write("current overlap:", overlap)
     st.write("current distance limiter:", distance_limiter)
+    st.write("current amount of results:", amount_of_results)
 
 #file = st.file_uploader("Upload a .txt file", type="txt")#change
 file = st.file_uploader("Upload a .pdf file or a .txt file", type=["pdf", "txt"])#change
@@ -70,7 +72,7 @@ if st.button("Search"):
         st.write("thinking!")
         collection = st.session_state.collection
 
-        result = collection.query(query_texts=[question], n_results=10)
+        result = collection.query(query_texts=[question], n_results=amount_of_results)
 
         if "context" not in st.session_state:
             st.session_state.context = []
